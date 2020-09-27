@@ -5,7 +5,7 @@ prefix=$2
 shift 2
 
 [[ -z $python ]] && python=python
-[[ -z $prefix ]] && prefix=/usr
+[[ -z $prefix ]] && prefix=/usr/local
 
 $python -m pip install --upgrade pip setuptools wheel
 
@@ -16,7 +16,7 @@ function install-ta-lib()
     curl https://pip.vnpy.com/colletion/ta-lib-0.4.0-src.tar.gz --output ta-lib-0.4.0-src.tar.gz
     tar -xf ta-lib-0.4.0-src.tar.gz
     cd ta-lib
-    ./configure --prefix=$prefix
+    ./configure --prefix=$prefix LDFLAGS="-lm"
     make -j
     make install
     popd
